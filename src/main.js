@@ -103,7 +103,8 @@ const markupBtn = arr.map(num => `<button type="button" class="page-button">${nu
 return buttonsListEl.insertAdjacentHTML('beforeend', markupBtn)
 }
 
-let globalLastClickColor = '#4e75ff';
+
+let activeButton = null;
 
 const oneClickToPage = async (event) => {
 	try{
@@ -112,8 +113,19 @@ const oneClickToPage = async (event) => {
 		}
 		const myClick = Number(event.target.textContent);
 		
-		const lastClick = event.target;
-		lastClick.style.backgroundColor = globalLastClickColor;
+		
+//todo Добавление backgroundColor к текущей кнопке
+		if (activeButton) {
+			activeButton.style.backgroundColor = '';
+		}
+		  if (event.target.style.backgroundColor === '') {
+			event.target.style.backgroundColor = '#4e75ff';
+		  } else {
+			event.target.style.backgroundColor = '';
+		  }
+		  activeButton = event.target;
+//todo Добавление backgroundColor к текущей кнопке
+
 
 		page = myClick;
 		loaderEl.style.display = 'block';
@@ -139,11 +151,6 @@ const oneClickToPage = async (event) => {
 	}
 
 }
-
-console.log(scrollBy)
-
-
-
 
 
 
